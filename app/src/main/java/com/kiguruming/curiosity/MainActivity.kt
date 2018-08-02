@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     inner class UiListener {
         fun onClick() {
             val intent = Intent(this@MainActivity, AsyncTaskLoaderActivity::class.java)
-            startActivity(intent);
+            startActivity(intent)
         }
     }
 }
