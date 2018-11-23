@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.kiguruming.curiosity.databinding.ActivityMainBinding
+import com.kiguruming.curiosity.ui.recyclerview.NestingRecyclerViewActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +17,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class UiListener {
-        fun onClick() {
+        fun onClickNestingRecyclerViewActivity() {
+            startActivity(NestingRecyclerViewActivity.createIntent(this@MainActivity))
         }
     }
 }
