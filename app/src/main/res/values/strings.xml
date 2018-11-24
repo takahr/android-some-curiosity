@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Curiosity</string>
+
+    <string name="button_outer_format">Outer %1$d</string>
+    <string name="button_inner_format">Inner %1$d</string>
 </resources>

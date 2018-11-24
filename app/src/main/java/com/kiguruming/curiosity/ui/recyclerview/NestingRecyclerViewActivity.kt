@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kiguruming.curiosity.R
 import com.kiguruming.curiosity.ui.recyclerview.adapter.OuterAdapter
 import kotlinx.android.synthetic.main.activity_nesting_recycler_view.*
@@ -17,7 +18,8 @@ class NestingRecyclerViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_nesting_recycler_view)
 
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        adapter.notifyDataSetChanged()
     }
 
     companion object {
