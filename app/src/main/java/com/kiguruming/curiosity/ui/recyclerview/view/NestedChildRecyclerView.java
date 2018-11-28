@@ -74,7 +74,26 @@ public class NestedChildRecyclerView extends RecyclerView {
 
     @Override
     public boolean startNestedScroll(int axes) {
-        Log.d(TAG, String.format(Locale.US, "startMestedScroll: %d", axes));
+        Log.d(TAG, String.format(Locale.US, "startNestedScroll: %d", axes));
         return super.startNestedScroll(axes);
+    }
+
+    @Override
+    public void stopNestedScroll() {
+        Log.d(TAG, "stopNestedScroll");
+        super.stopNestedScroll();
+    }
+
+    @Override
+    public void stopNestedScroll(int type) {
+        Log.d(TAG, String.format(Locale.US, "stopNestedScroll type:%d", type));
+        super.stopNestedScroll(type);
+    }
+
+    @Override
+    public boolean hasNestedScrollingParent() {
+        boolean res = super.hasNestedScrollingParent();
+        Log.d(TAG, String.format(Locale.US, "hasNestedScrollingParent :%s", res));
+        return res;
     }
 }

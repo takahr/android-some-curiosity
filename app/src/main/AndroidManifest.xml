@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".ui.recyclerview.NestingRecyclerViewActivity"
             android:label="NestingRecyclerView" />
+        <activity android:name=".ui.recyclerview.NestedScrollViewActivity"
+            android:label="NestedScrollView" />
     </application>
 
 </manifest>
