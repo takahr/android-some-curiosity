@@ -3,11 +3,15 @@ package com.kiguruming.curiosity.ui.recyclerview.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.NestedScrollingParentHelper;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.core.view.NestedScrollingParent2;
 
@@ -39,6 +43,8 @@ public class NestingParentRecyclerView extends RecyclerView implements NestedScr
     @Override
     public void onNestedScrollAccepted(@NonNull View child, @NonNull View target, int axes, int type) {
         parentHelper.onNestedScrollAccepted(child, target, axes, type);
+        startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
+        Log.d(TAG, "onNestedScrollAccepted");
     }
 
     @Override
@@ -56,6 +62,50 @@ public class NestingParentRecyclerView extends RecyclerView implements NestedScr
     public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
         Log.d(TAG, String.format("onNestedPreScroll view:%x dx:%d dy:%d consumed[0]:%d consumed[1]:%d type:%d",
                 System.identityHashCode(target), dx, dy, consumed[0], consumed[1], type));
+    }
 
+    @Override
+    public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        super.requestDisallowInterceptTouchEvent(disallowIntercept);
+        Log.d(TAG, String.format("requestDisallowInterceptTouchEvent: %s", disallowIntercept));
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        boolean res = super.onTouchEvent(e);
+        Log.d(TAG, String.format(Locale.US, "onTouchEvent: %d %s", e.getAction(), res));
+        return res;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent e) {
+        boolean res = super.onInterceptTouchEvent(e);
+        Log.d(TAG, String.format(Locale.US, "onInterceptTouchEvent: %d %s", e.getAction(), res));
+        return res;
+    }
+
+    @Override
+    public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+        super.onNestedPreScroll(target, dx, dy, consumed);
+        Log.d(TAG, String.format("onNestedPreScroll without type view:%x dx:%d dy:%d consumed[0]:%d consumed[1]:%d",
+                System.identityHashCode(target), dx, dy, consumed[0], consumed[1]));
+    }
+
+    @Override
+    public boolean startNestedScroll(int axes) {
+        Log.d(TAG, String.format(Locale.US, "startMestedScroll: %d", axes));
+        return super.startNestedScroll(axes);
+    }
+
+    @Override
+    public void stopNestedScroll() {
+        Log.d(TAG, "stopNestedScroll");
+        super.stopNestedScroll();
+    }
+
+    @Override
+    public void stopNestedScroll(int type) {
+        Log.d(TAG, String.format(Locale.US, "stopNestedScroll type:%d", type));
+        super.stopNestedScroll(type);
     }
 }

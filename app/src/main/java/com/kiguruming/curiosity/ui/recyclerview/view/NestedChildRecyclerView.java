@@ -3,7 +3,10 @@ package com.kiguruming.curiosity.ui.recyclerview.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,5 +50,31 @@ public class NestedChildRecyclerView extends RecyclerView {
         Log.d(TAG, String.format("onStartNestedScroll child:%x target:%x, axes:%d result:%s",
                 System.identityHashCode(child), System.identityHashCode(target), nestedScrollAxes, res));
         return res;
+    }
+
+    @Override
+    public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        super.requestDisallowInterceptTouchEvent(disallowIntercept);
+        Log.d(TAG, String.format("requestDisallowInterceptTouchEvent: %s", disallowIntercept));
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        boolean res = super.onTouchEvent(e);
+        Log.d(TAG, String.format(Locale.US, "onTouchEvent: %d %s", e.getAction(), res));
+        return res;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent e) {
+        boolean res = super.onInterceptTouchEvent(e);
+        Log.d(TAG, String.format(Locale.US, "onInterceptTouchEvent: %d %s", e.getAction(), res));
+        return res;
+    }
+
+    @Override
+    public boolean startNestedScroll(int axes) {
+        Log.d(TAG, String.format(Locale.US, "startMestedScroll: %d", axes));
+        return super.startNestedScroll(axes);
     }
 }
